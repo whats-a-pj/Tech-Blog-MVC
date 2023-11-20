@@ -1,0 +1,16 @@
+<!-- views/home.handlebars -->
+{{#if posts}}
+  <h1>Latest Posts</h1>
+  <ul>
+    {{#each posts}}
+      <li>
+        <a href="/post/{{this.id}}">
+          <h2>{{this.title}}</h2>
+          <p>Posted by {{this.User.username}} on {{this.createdAt}}</p>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No posts available</p>
+{{/if}}
