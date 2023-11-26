@@ -1,11 +1,47 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { /* UUIDV4, */ Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-const Comment = sequelize.define('Comment', {
-  text: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-});
+class Comment extends Model {}
+
+Comment.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        comment_content: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        post_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'post',
+                key: 'id',
+            },
+        },
+    },
+    {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'comment',
+    },
+);
 
 module.exports = Comment;
+
+// const { DataTypes } = require('sequelize');
+// const sequelize = require('../config/database');
+
+// const Comment = sequelize.define('Comment', {
+//   text: {
+//     type: DataTypes.TEXT,
+//     allowNull: false,
+//   },
+// });
+
+// module.exports = Comment;

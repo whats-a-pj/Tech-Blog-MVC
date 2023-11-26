@@ -1,4 +1,4 @@
-const Post = require('../models/post');
+const Post = require('../models/Post');
 
 const homeController = {
   async getHomePage(req, res) {
