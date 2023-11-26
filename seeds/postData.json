@@ -1,0 +1,14 @@
+[
+    {
+        "post_title": "Testing",
+        "post_content": "Example post goes here, running tests!"
+    },
+    {
+        "post_title": "MySQL2",
+        "post_content": "This is a pain in the butt!!"
+    },
+    {
+        "post_title": "What is relational data?",
+        "post_content": "when all the little bits of data kiss hehe"
+    }
+]
