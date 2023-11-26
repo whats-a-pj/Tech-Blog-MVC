@@ -1,22 +1,42 @@
 <!-- views/login.handlebars -->
 <div class="row">
   <div class="col-md-6">
-    <h2>Login</h2>
-
     <form class="form login-form">
       <div class="form-group">
-        <label for="email-login">email:</label>
-        <input class="form-input" type="text" id="email-login" />
+        <div>Username:</div>
+        <input class="form-input" type="text" id="username-login" placeholder="Example123"/>
       </div>
       <div class="form-group">
-        <label for="password-login">password:</label>
-        <input class="form-input" type="password" id="password-login" />
+        <div>Password:</div>
+        <input class="form-input" type="password" id="password-login" placeholder="Must-Be-6-ch@racters"/>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
-        <button class="signUpInstead" type="submit">Sign up instead</button>
+        <button id="loginBtn" class="btn btn-primary" type="submit">Login</button>
+      </div>
+      <div>
+        <button id="signUpBtn" class="signUpInstead" type="submit">Sign up instead</button>
       </div>
     </form>
-  </div>
 
-<script src="./js/login.js"></script>
+      <!-- Sign-up Form (Initially hidden) -->
+    <div>
+      <form id="signUpForm" class="hidden mt-32 mb-40 space-y-6 w-full max-w-sm mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+          <div>
+              <label for="signupEmail" class="block text-sm font-medium leading-6 text-pink-600">Email address</label>
+              <div class="mt-2">
+                  <input id="signupEmail" name="signupEmail" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-pink-600 shadow-sm ring-1 ring-inset ring-pink-300 placeholder:text-pink-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6">
+              </div>
+          </div>
+          <div>
+              <label for="signupPassword" class="block text-sm font-medium leading-6 text-pink-600">Password</label>
+              <div class="mt-2">
+                  <input id="signupPassword" name="signupPassword" type="password" autocomplete="new-password" required class="block w-full rounded-md border-0 py-1.5 text-pink-600 shadow-sm ring-1 ring-inset ring-pink-300 placeholder:text-pink-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6">
+              </div>
+          </div>
+          <button type="submit" class="flex w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600">Sign Up</button>
+      </form>    
+  </div>    
+  
+  <script src="/js/login.js"></script>
+
+</body>

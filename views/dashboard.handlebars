@@ -1,26 +1,20 @@
-{{#extend "layout"}}
-    {{#content "body"}}
-        <div class="container">
-            <header>
-                <!-- Navbar -->
-                <nav class="navbar">
-                    <!-- Navbar content -->
-                    <!-- Replace the following with your actual navbar content -->
-                    <div class="navbar-brand">
-                        <a class="navbar-item" href="#">
-                            Your Logo or Brand
-                        </a>
-                    </div>
-                    <!-- Other navbar elements -->
-                </nav>
-            </header>
-            
+<style>
+
+.hide {
+    display: none;
+}
+
+</style>
+<body>
+<div class="container">
             <h1 class="title is-2">Tech Blog</h1>
             
             <div class="buttons mt-4">
-                <a href="/view-posts" class="button is-primary">View Posts</a>
-                <a href="/create-post" class="button is-success">Create Post</a>
+                <h2 id="post-title" class="hide"></h2>
+                <div id="post-content" class="hide"></div>
+                <button class="button is-success" id="new-post">Create Post</button>
             </div>
         </div>
-    {{/content}}
-{{/extend}}
+    <script src="/js/homepage.js"></script>
+        <script src="/js/logout.js"></script>
+</body>

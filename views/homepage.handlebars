@@ -1,11 +1,13 @@
 <!-- views/home.handlebars -->
-{{#if posts}}
+{{#if post}}
+<h1 class="title is-2">Tech Blog</h1>
   <h1>Latest Posts</h1>
   <ul>
-    {{#each posts}}
+    {{#each post}}
       <li>
         <a href="/post/{{this.id}}">
-          <h2>{{this.title}}</h2>
+          <h2>{{this.post_title}}</h2>
+          <div>{{this.post_content}}</div>
           <p>Posted by {{this.User.username}} on {{this.createdAt}}</p>
         </a>
       </li>

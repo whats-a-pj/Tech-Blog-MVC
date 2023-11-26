@@ -8,7 +8,7 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   
 
-		res.render('dashboard', {
+		res.render('homepage', {
 
 		
 			logged_in: req.session.logged_in
@@ -26,14 +26,14 @@ router.get('/posts/:id', async (req, res) => {
 		]
 	});
 	const postByIdData = postById.get({ plain: true });
-	res.render('dashboard', {
+	res.render('homepage', {
 		...postByIdData,
 		logged_in: req.session.logged_in
 	});
 });
 
 
-router.get('/dashboard', withAuth, async (req, res) => { 
+router.get('/homepage', withAuth, async (req, res) => { 
     console.log(req.session)
     try {
         const post = await Post.findAll({
@@ -55,7 +55,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
         // console.log(userProfile)
     const profileData = userProfile.get({ plain: true });
     
-    res.render('dashboard', { 
+    res.render('homepage', { 
         ...profileData, 
         userPost, 
         mostRecent,
@@ -68,14 +68,14 @@ router.get('/dashboard', withAuth, async (req, res) => {
 )
 router.get('/login', (req, res) => {
 	if (req.session.logged_in) {
-		res.redirect('/dashboard');
+		res.redirect('/homepage');
 		return;
 	}
 
 	res.render('login');
 });
 
-//todo do this but with posts for dashboard??
+//todo do this but with posts for homepage??
 router.post('/showSaved', withAuth, async (req, res) => {
     // console.log('@@@@@@@@@@@@@@@@@@@@@')
     // console.log(req.body.id)
@@ -119,7 +119,7 @@ const profileData = userProfile.get({ plain: true });
     }
 })
 // these post routes are *supposed to* take the users input from project 
-// questions and add it to the hidden divs in dashboard
+// questions and add it to the hidden divs in homepage
 
 router.get('/renderPost', withAuth, async (req, res) => {
     try {
@@ -135,7 +135,7 @@ router.get('/renderPost', withAuth, async (req, res) => {
         if (showPost) {
             const inputPostData = showPost.get({ plain: true });
 console.log(inputPostData)
-            res.render('dashboard', {
+            res.render('homepage', {
                 ...inputPostData,
                 logged_in: true
             });
@@ -167,8 +167,8 @@ router.post('/submitPost', withAuth, async (req, res) => {
 
         if (updatedData) {
             const inputPostData = updatedData.get({ plain: true });
-            // Render the dashboard with the updated data
-            res.render('dashboard', {
+            // Render the homepage with the updated data
+            res.render('homepage', {
                 ...inputPostData,
                 logged_in: true
             });
