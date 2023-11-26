@@ -9,12 +9,9 @@
     <nav class="flex items-center justify-between py-4">
         <ul class="flex space-x-4 text-white ml-10">
             <li><a href="/" class="hover:text-gray-300">Home</a></li>
-            <li><a href="/views/dashboard.handlebars" class="hover:text-gray-300">Dashboard</a></li>
-            {{#if isLoggedIn}}
-                <li><a href="/" class="hover:text-gray-300">Logout</a></li>
-            {{else}}
-                <li><a href="/views/login.handlebars" class="hover:text-gray-300">Login</a></li>
-            {{/if}}
+            <li><a href="/dashboard" class="hover:text-gray-300" id="goDashboard">Dashboard</a></li>
+            <li><a href="/login" class="hover:text-gray-300" id="goLogin">Login</a></li>
+            <li><a href="/logout" id="logout"class="hover:text-gray-300" id="goHome">Logout</a></li>
         </ul>
     </nav>
 </header>

@@ -1,18 +1,21 @@
 <!-- views/home.handlebars -->
-{{#if post}}
-<h1 class="title is-2">Tech Blog</h1>
-  <h1>Latest Posts</h1>
-  <ul>
-    {{#each post}}
-      <li>
-        <a href="/post/{{this.id}}">
-          <h2>{{this.post_title}}</h2>
-          <div>{{this.post_content}}</div>
-          <p>Posted by {{this.User.username}} on {{this.createdAt}}</p>
-        </a>
-      </li>
-    {{/each}}
-  </ul>
-{{else}}
-  <p>No posts available</p>
-{{/if}}
+<div class="container mx-auto py-8">
+    {{#if post}}
+        <h1 class="text-4xl font-bold text-purple-600 mb-6">Tech Blog</h1>
+        <h2 class="text-2xl font-semibold mb-4">Latest Posts</h2>
+        <ul>
+            {{#each post}}
+                <li class="mb-6">
+                    <a href="/post/{{this.id}}" class="text-purple-600 hover:underline">
+                        <h2 class="text-xl font-semibold">{{this.post_title}}</h2>
+                        <div class="text-gray-700">{{this.post_content}}</div>
+                        <p class="text-sm text-gray-500">Posted by {{this.User.username}} on {{this.createdAt}}</p>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p class="text-lg text-gray-600">No posts available</p>
+    {{/if}}
+</div>
+

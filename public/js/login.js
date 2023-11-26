@@ -44,7 +44,7 @@ const signupHandler = async (event) => {
     event.preventDefault();
 
 // const name = document.querySelector('#signup-name').value.trim();
-const username = document.querySelector('#signupusername').value.trim();
+const username = document.querySelector('#signupUsername').value.trim();
 const password = document.querySelector('#signupPassword').value.trim();
 if (username && password) {
     const response = await fetch('/api/users/', {
@@ -61,5 +61,19 @@ if (username && password) {
     }
 };
 
+const logout = async () => {
+    const logout = await fetch('/api/users/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (logout.ok) {
+        document.location.replace('/');
+    } else {
+        alert(logout.statusText);
+    }
+};
+
 document.querySelector('#loginBtn').addEventListener('click', loginHandler);
 document.querySelector('#signUpForm').addEventListener('click', signupHandler);
+document.querySelector('#logout').addEventListener('click', logout);
