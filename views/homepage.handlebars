@@ -1,5 +1,19 @@
 <!-- views/home.handlebars -->
 <body>
+<header class="bg-gradient-to-r from-purple-700 to-purple-500">
+    <nav class="flex items-center justify-between py-4">
+        <ul class="flex space-x-4 text-white ml-10 text-lg">
+            <li><a href="/" class="hover:text-gray-300 text-lg">Home</a></li>
+            <li><a href="/dashboard" class="hover:text-gray-300 text-lg" id="goDashboard">Dashboard</a></li>
+            <li><a href="/logout" id="log-out" class="hover:text-gray-300 text-lg">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="bg-gradient-to-r from-purple-500 to-purple-700 text-white py-6">
+    <div class="container mx-auto pl-8">
+      <h1 class="text-4xl font-bold">Tech Blog</h1>
+    </div>
+</div>
 <div class="container mx-auto py-8">
     {{#if post}}
         <h1 class="text-4xl font-bold text-purple-600 mb-6">Tech Blog</h1>
