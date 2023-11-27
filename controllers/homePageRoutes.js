@@ -181,30 +181,58 @@ router.post('/submitPost', withAuth, async (req, res) => {
     }
 });
 
+router.get('/dashboard', withAuth, async (req, res) => {
+    res.render('dashboard', {
 
-// router.get('/projectquestions', withAuth, async (req, res) => {
+		
+        logged_in: req.session.logged_in
+    });
+})
+
+// router.get('/dashboard', withAuth, async (req, res) => { 
+//     console.log(req.session)
 //     try {
-//         const codeSnips = await User.findByPk(req.session.user_id, {
-//             attributes: { exclude: ['password'] },
-//             include: [{ model: Post }]
-//         })
+//         const userPostData = await Post.findAll({
 
-//         const codeSnippetsData = codeSnips.get({ plain: true });
+//             where: { user_id: req.session.user_id }
 
-//         res.render('projectquestions', {
-//             ...codeSnippetsData,
-//             logged_in: true
-//         })
+//         });
 //     } catch (err) {
 //         res.status(500).json(err)
 //     }
-// })
+//     });
+//         console.log(userPostData)
 
-// router.post('/submitPost', withAuth, async (req, res) => {
-// 	await Post.create(req.body, req.session.user_id)
-//     // console.log('$$$$$$$$$$$$$$$$')
-//     // console.log(req.body)
-//     res.redirect('/renderPost');
-// });
+//         const userPosts = userPostData.map((posts) =>
+//             posts.get({ plain: true })
+//         );  
+//         // try {
+//         const mostRecent = userPosts.pop()
+// 		const userProfile = await User.findByPk(req.session.user_id, {
+//         attributes: { exclude: ['password'] },
+//         include: [{model: Post}]
+//     })
+//         // console.log(userProfile)
+//     const profileData = userProfile.get({ plain: true });
+    
+//     res.render('dashboard', { 
+//         ...profileData, 
+//         userPosts, 
+//         mostRecent,
+//         logged_in: true
+//     })
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// }
+// )
+// router.get('/login', (req, res) => {
+// 	if (req.session.logged_in) {
+// 		res.redirect('/dashboard');
+// 		return;
+// 	}
+
+// 	res.render('login');
+//});
 
 module.exports = router;
