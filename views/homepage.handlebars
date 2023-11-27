@@ -19,16 +19,11 @@
         <h1 class="text-4xl font-bold text-purple-600 mb-6">Tech Blog</h1>
         <h2 class="text-2xl font-semibold mb-4">Latest Posts</h2>
         <ul>
-            {{#each post}}
-                <li class="mb-6">
-                    <a href="/post/{{this.id}}" class="text-purple-600 hover:underline">
-                        <h2 class="text-xl font-semibold">{{this.post_title}}</h2>
-                        <div class="text-gray-700">{{this.post_content}}</div>
-                        <p class="text-sm text-gray-500">Posted by {{this.User.username}} on {{this.createdAt}}</p>
-                    </a>
-                </li>
-            {{/each}}
-        </ul>
+                <ul>
+                    {{#each userPost as |userPost|}}
+                    <li class="mb-2"><a href="#" class="text-pink-800 hover:underline saved" id={{userPost.post_title}}>{{userPost.post_content}}</a></li>
+                    {{/each}}
+                </ul>
     {{else}}
         <p class="text-lg text-gray-600">No posts available</p>
     {{/if}}

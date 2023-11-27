@@ -60,7 +60,7 @@ router.put('/:id', withAuth, async (req, res) => {
         const updatedPost = await Post.update(
             {
                 id: req.body.id,
-                post_title: req.body.title,
+                post_title: req.body.post_title,
                 post_content: req.body.post_content
             },
             {
