@@ -3,7 +3,7 @@
 <header class="bg-gradient-to-r from-purple-700 to-purple-500">
     <nav class="flex items-center justify-between py-4">
         <ul class="flex space-x-4 text-white ml-10 text-lg">
-            <li><a href="/" class="hover:text-gray-300 text-lg">Home</a></li>
+            <li><a href="/homepage" class="hover:text-gray-300 text-lg">Home</a></li>
             <li><a href="/dashboard" class="hover:text-gray-300 text-lg" id="goDashboard">Dashboard</a></li>
             <li><div id="goHome" class="hover:text-gray-300 text-lg">Logout</div></li>
         </ul>
@@ -15,27 +15,17 @@
     </div>
 </div>
 <div class="container mx-auto py-8">
-    {{#if userPost}}
-        <ul>
-                <ul>
-                    {{#each userPost as |userPost|}}
-                    <li class="mb-2" id={{userPost.post_title}}></li>
-                    {{/each}}
-                </ul>
+    {{#if posts}}
+        <ul class="bg-purple-500 text-white">
+            {{#each posts as |posts|}}
+                <li class="mt-2">{{posts.post_title}}</li>
+                <li>{{posts.post_content}}</li>
+            {{/each}}
+        </ul>
     {{else}}
-        <p class="text-lg text-gray-600">No posts available</p>
+        <p class="text-lg text-gray-600">No post available</p>
     {{/if}}
-        {{#if userPost}}
-        <ul>
-                <ul>
-                    {{#each userPost as |userPost|}}
-                    <li>{{userPost.post_content}}</li>
-                    {{/each}}
-                </ul>
-    {{else}}
-        <p class="text-lg text-gray-600">No posts available</p>
-    {{/if}}
-
 </div>
+
         <script src="/js/logout.js"></script>
 </body>

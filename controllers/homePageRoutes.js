@@ -42,6 +42,7 @@ router.get('/homepage', withAuth, async (req, res) => {
 
         });
         console.log(post)
+        console.log(5);
 
         const userPost = post.map((posts) =>
             posts.get({ plain: true })
@@ -78,7 +79,7 @@ router.get('/login', (req, res) => {
 router.get('/dashboard', withAuth, async (req, res) => {
     res.render('dashboard', {
 
-		
+
         logged_in: req.session.logged_in
     });
 });
@@ -94,6 +95,7 @@ router.post('/showSaved', withAuth, async (req, res) => {
 
         });
         console.log(post)
+        console.log(4)
 
         const userPost = post.map((posts) =>
             posts.get({ plain: true })
@@ -137,7 +139,7 @@ router.get('/renderPost', withAuth, async (req, res) => {
             },
             attributes: ['post_title', 'post_content']
         });
-
+        console.log(3)
         if (showPost) {
             const inputPostData = showPost.get({ plain: true });
 console.log(inputPostData)
@@ -155,60 +157,36 @@ console.log(inputPostData)
     }
 });
 
-router.post('/logout', (req, res) => {
-    if (req.session.logged_in) {
-        req.session.destroy(() => {
-            res.status(204).end();
-        });
-    } else {
-        res.status(404).end();
-    }
+router.get('/dashboard', withAuth, async (req, res) => {
+  let newPost = req.body;
+  newPost.user_id = req.session.user_id;
+  console.log(2)
+  try {
+      await Post.create(newPost);
+      // Fetch the updated data from the database
+      const updatedData = await Post.findOne({
+          where: {
+              user_id: req.session.user_id,
+              post_title: req.body.post_title,
+              post_content: req.body.post_content
+          },
+          attributes: ['post_title', 'post_content', 'user_id']
+      });
+
+      if (updatedData) {
+          const inputPostData = updatedData.get({ plain: true });
+          // Render the homepage with the updated data
+          res.render('homepage', {
+              ...inputPostData,
+              logged_in: true
+          });
+      } else {
+          // Handle the case where no record was found
+          res.status(404).send("Title not found");
+      }
+  } catch (err) {
+      res.status(500).json(err);
+  }
 });
-
-// router.get('/dashboard', withAuth, async (req, res) => { 
-//     console.log(req.session)
-//     try {
-//         const userPostData = await Post.findAll({
-
-//             where: { user_id: req.session.user_id }
-
-//         });
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-//     });
-//         console.log(userPostData)
-
-//         const userPosts = userPostData.map((posts) =>
-//             posts.get({ plain: true })
-//         );  
-//         // try {
-//         const mostRecent = userPosts.pop()
-// 		const userProfile = await User.findByPk(req.session.user_id, {
-//         attributes: { exclude: ['password'] },
-//         include: [{model: Post}]
-//     })
-//         // console.log(userProfile)
-//     const profileData = userProfile.get({ plain: true });
-    
-//     res.render('dashboard', { 
-//         ...profileData, 
-//         userPosts, 
-//         mostRecent,
-//         logged_in: true
-//     })
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// }
-// )
-// router.get('/login', (req, res) => {
-// 	if (req.session.logged_in) {
-// 		res.redirect('/dashboard');
-// 		return;
-// 	}
-
-// 	res.render('login');
-//});
 
 module.exports = router;
