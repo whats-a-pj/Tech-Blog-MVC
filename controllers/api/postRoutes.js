@@ -2,16 +2,12 @@ const router = require('express').Router();
 const { Post, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-//router tests
-
-// pull all maps by user if there are multiple
-
 router.get('/', withAuth, async (req, res) => {
     try {
         const allPostData = await Post.findAll({
             include: [{ model: User }]
         });
-
+        
         res.status(200).json(allPostData);
     } catch (err) {
 
@@ -39,20 +35,19 @@ router.get('/:id', withAuth, async (req, res) => {
 })
 
 router.post('/', withAuth, async (req, res) => {
-    try {
+  try {
         const newPost = await Post.create({
             ...req.body,
-            user_id: req.session.user_id,
-        });
+              user_id: req.session.user_id,
+              });
 
 
         res.status(200).json(newPost);
-    } catch (err) {
-        res.status(500).json(err);
-        console.error(err)
-    }
-
-})
+  } catch (err) {
+      res.status(500).json(err);
+console.error(err)
+  }
+});
 
 router.put('/:id', withAuth, async (req, res) => {
 

@@ -64,8 +64,8 @@ router.get('/homepage', withAuth, async (req, res) => {
     } catch (err) {
         res.status(500).json(err)
     }
-}
-)
+});
+
 router.get('/login', (req, res) => {
 	if (req.session.logged_in) {
 		res.redirect('/homepage');
@@ -73,6 +73,14 @@ router.get('/login', (req, res) => {
 	}
 
 	res.render('login');
+});
+
+router.get('/dashboard', withAuth, async (req, res) => {
+    res.render('dashboard', {
+
+		
+        logged_in: req.session.logged_in
+    });
 });
 
 //todo do this but with posts for homepage??
@@ -118,8 +126,6 @@ const profileData = userProfile.get({ plain: true });
         res.status(500).json(err);
     }
 })
-// these post routes are *supposed to* take the users input from project 
-// questions and add it to the hidden divs in homepage
 
 router.get('/renderPost', withAuth, async (req, res) => {
     try {
@@ -149,45 +155,37 @@ console.log(inputPostData)
     }
 });
 
-router.post('/submitPost', withAuth, async (req, res) => {
-    let newPost = req.body;
-    newPost.user_id = req.session.user_id;
+// router.post('/submitPost', withAuth, async (req, res) => {
+//     let newPost = req.body;
+//     newPost.user_id = req.session.user_id;
 
-    try {
-        await Post.create(newPost);
-        // Fetch the updated data from the database
-        const updatedData = await Post.findOne({
-            where: {
-                user_id: req.session.user_id,
-                post_title: req.body.title,
-                post_content: req.body.post_content
-            },
-            attributes: ['post_title', 'post_content']
-        });
+//     try {
+//         await Post.create(newPost);
+//         // Fetch the updated data from the database
+//         const updatedData = await Post.findOne({
+//             where: {
+//                 user_id: req.session.user_id,
+//                 post_title: req.body.title,
+//                 post_content: req.body.post_content
+//             },
+//             attributes: ['post_title', 'post_content']
+//         });
 
-        if (updatedData) {
-            const inputPostData = updatedData.get({ plain: true });
-            // Render the homepage with the updated data
-            res.render('homepage', {
-                ...inputPostData,
-                logged_in: true
-            });
-        } else {
-            // Handle the case where no record was found
-            res.status(404).send("Title not found");
-        }
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-router.get('/dashboard', withAuth, async (req, res) => {
-    res.render('dashboard', {
-
-		
-        logged_in: req.session.logged_in
-    });
-})
+//         if (updatedData) {
+//             const inputPostData = updatedData.get({ plain: true });
+//             // Render the homepage with the updated data
+//             res.render('homepage', {
+//                 ...inputPostData,
+//                 logged_in: true
+//             });
+//         } else {
+//             // Handle the case where no record was found
+//             res.status(404).send("Title not found");
+//         }
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 // router.get('/dashboard', withAuth, async (req, res) => { 
 //     console.log(req.session)
