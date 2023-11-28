@@ -2,12 +2,16 @@ const router = require('express').Router();
 const { Post, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+//router tests
+
+// pull all maps by user if there are multiple
+
 router.get('/', withAuth, async (req, res) => {
     try {
         const allPostData = await Post.findAll({
             include: [{ model: User }]
         });
-        
+
         res.status(200).json(allPostData);
     } catch (err) {
 
@@ -33,21 +37,52 @@ router.get('/:id', withAuth, async (req, res) => {
         res.status(500).json(err)
     }
 })
+router.post('/submitPost', withAuth, async (req, res) => {
+  let newPost = req.body;
+  newPost.user_id = req.session.user_id;
 
-router.post('/', withAuth, async (req, res) => {
   try {
-        const newPost = await Post.create({
-            ...req.body,
+      await Post.create(newPost);
+      // Fetch the updated data from the database
+      const updatedData = await Post.findOne({
+          where: {
               user_id: req.session.user_id,
-              });
+              post_title: req.body.post_title,
+              post_content: req.body.post_content
+          },
+          attributes: ['post_title', 'post_content']
+      });
 
-
-        res.status(200).json(newPost);
+      if (updatedData) {
+          const inputPostData = updatedData.get({ plain: true });
+          // Render the homepage with the updated data
+          res.render('homepage', {
+              ...inputPostData,
+              logged_in: true
+          });
+      } else {
+          // Handle the case where no record was found
+          res.status(404).send("Title not found");
+      }
   } catch (err) {
       res.status(500).json(err);
-console.error(err)
   }
 });
+// router.post('/submitPost', withAuth, async (req, res) => {
+//     try {
+//         const newPost = await Post.create({
+//             ...req.body,
+//             user_id: req.session.user_id,
+//         });
+
+
+//         res.status(200).json(newPost);
+//     } catch (err) {
+//         res.status(500).json(err);
+//         console.error(err)
+//     }
+
+// })
 
 router.put('/:id', withAuth, async (req, res) => {
 
