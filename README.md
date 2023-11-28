@@ -8,7 +8,7 @@
 
 ## Description
 
-This is a handlebars tech blog built from scratch! Users can sign up and login to create posts on their home page! This assignment definitely had me biting off more than i could chew, its a BEAST. Sign in, go to your dashboard and you can create a post there that will show up on your homepage. Still working out the bugs but as of right now it is receiving MOST data. Just not completely able to Update or Delete yet.
+This is a handlebars tech blog built from scratch! Users can sign up and login to create posts on their home page! This assignment definitely had me biting off more than i could chew, its a BEAST. Sign in, go to your dashboard and you can create a post there that will show up on your homepage. Still working out the bugs but as of right now it is receiving MOST data. Just not completely able to Update or Delete yet. Unfortunately as well, it works best on localhost. I put a TON of time and effort into this one and honestly I would just really appreciate it if that was recognized.
 
 ## License
 
@@ -41,9 +41,9 @@ SOFTWARE.
 
 <details><summary>Screenshot & Link to deployed application</summary>
 
-Deployed site: 
+Deployed site: https://tech-blog-mvc.up.railway.app/
 
-Railway deployment: 
+Railway deployment: https://railway.app/project/29e699e8-0ebc-46f7-af89-54f7d41a66e1
 
 ![LOGIN](/public/images/LOGIN.PNG)
 ![SIGNUP](/public/images/SIGNUP.PNG)
