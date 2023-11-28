@@ -5,7 +5,7 @@
         <ul class="flex space-x-4 text-white ml-10 text-lg">
             <li><a href="/" class="hover:text-gray-300 text-lg">Home</a></li>
             <li><a href="/dashboard" class="hover:text-gray-300 text-lg" id="goDashboard">Dashboard</a></li>
-            <li><a href="/logout" id="log-out" class="hover:text-gray-300 text-lg">Logout</a></li>
+            <li><div id="goHome" class="hover:text-gray-300 text-lg">Logout</div></li>
         </ul>
     </nav>
 </header>
@@ -19,12 +19,23 @@
         <ul>
                 <ul>
                     {{#each userPost as |userPost|}}
-                    <li class="mb-2"><a href="#" class="text-pink-800 hover:underline saved" id={{userPost.post_title}}>{{userPost.post_content}}</a></li>
+                    <li class="mb-2" id={{userPost.post_title}}></li>
                     {{/each}}
                 </ul>
     {{else}}
         <p class="text-lg text-gray-600">No posts available</p>
     {{/if}}
+        {{#if userPost}}
+        <ul>
+                <ul>
+                    {{#each userPost as |userPost|}}
+                    <li>{{userPost.post_content}}</li>
+                    {{/each}}
+                </ul>
+    {{else}}
+        <p class="text-lg text-gray-600">No posts available</p>
+    {{/if}}
+
 </div>
         <script src="/js/logout.js"></script>
 </body>

@@ -132,7 +132,7 @@ router.get('/renderPost', withAuth, async (req, res) => {
         const showPost = await Post.findOne({
             where: {
                 user_id: req.session.user_id,
-                post_title: req.body.title,
+                post_title: req.body.post_title,
                 post_content: req.body.post_content
             },
             attributes: ['post_title', 'post_content']
@@ -155,7 +155,15 @@ console.log(inputPostData)
     }
 });
 
-
+router.post('/logout', (req, res) => {
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+});
 
 // router.get('/dashboard', withAuth, async (req, res) => { 
 //     console.log(req.session)
